@@ -1,17 +1,23 @@
-import { Router, Request, Response } from "express";
+import type { Request, Response } from "express";
+import { Router } from "express";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
+export async function getHomePage(req: Request, res: Response) {
   res.render("pages/home", { title: "Home Page" });
-});
+}
 
-router.get("/about", (req: Request, res: Response) => {
-  res.render("pages/about", { title: "About Page" });
-});
+export async function getAboutPage(req: Request, res: Response) {
+  res.render("pages/home", { title: "Home Page" });
+}
 
-router.use((req: Request, res: Response) => {
+export async function get404Page(req: Request, res: Response) {
   res.status(404).send("Page not found.");
-});
+}
+
+router
+  .get("/", getHomePage)
+  .get("/about", getAboutPage)
+  .use(get404Page);
 
 export default router;
