@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Render } from '@nestjs/common';
 import { PlaygroundService } from '../services/PlaygroundService';
 import { Playground } from '../entities/Playground';
 
@@ -15,5 +15,11 @@ export class PlaygroundController {
   @Get()
   async getAllPlaygrounds(): Promise<string> {
     return await this.playgroundService.getAllPlaygrounds()
+  }
+
+  @Get('/:id')
+  @Render('templates/detailsHeader')
+  async getPlaygroundHeader(@Param('id') id: number) {
+    return await this.playgroundService.getPlaygroundById(id)
   }
 }

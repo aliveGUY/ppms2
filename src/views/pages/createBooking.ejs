@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../templates/commonMeta') %>
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('../templates/header') %>
+
+    <div class="page-grow-container">
+      <div class="page-container">
+        <h2>Create New Booking</h2>
+        <form
+          hx-post="/api/booking"
+          hx-target="#form-response"
+          hx-swap="outerHTML"
+        >
+          <div>
+            <label for="start_date">Start Date:</label>
+            <input
+              type="datetime-local"
+              id="start_date"
+              name="start_date"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="end_date">End Date:</label>
+            <input
+              type="datetime-local"
+              id="end_date"
+              name="end_date"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <button type="submit">Create Booking</button>
+          </div>
+        </form>
+
+        <div id="form-response"></div>
+      </div>
+    </div>
+
+    <%- include('../templates/footer') %>
+  </body>
+</html>

@@ -22,4 +22,8 @@ export class PlaygroundService {
     const result = playgrounds.map(item => generateTag('playground-list-item', item))
     return result.join('\n')
   }
+
+  async getPlaygroundById(id: number): Promise<Playground | null> {
+    return await this.playgroundRepository.findOne({ where: { id } })
+  }
 }

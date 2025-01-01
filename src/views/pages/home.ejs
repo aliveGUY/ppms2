@@ -6,13 +6,16 @@
   </head>
   <body>
     <%- include('../templates/header') %>
-    <div class="page-container">
-      <h1>Home</h1>
-      <div
-        hx-get="/api/playground"
-        hx-trigger="load"
-        class="playground-list"
-      ></div>
+
+    <div class="page-grow-container">
+      <div class="page-container">
+        <h1>Home</h1>
+        <div
+          hx-get="/api/playground"
+          hx-trigger="load"
+          class="playground-list"
+        ></div>
+      </div>
     </div>
 
     <%- include('../templates/footer') %>

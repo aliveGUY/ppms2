@@ -17,4 +17,10 @@ export class HTMLController {
       id: id
     };
   }
+
+  @Get('/booking/new')
+  @Render('pages/createBooking')
+  getCreateBookingPage() {
+    return { title: 'Create Appointment' };
+  }
 }
