@@ -8,12 +8,16 @@ class PlaygroundListItem extends HTMLElement {
   }
 
   render() {
-    const title = this.getAttribute("title") || "Default Title";
-    const location = this.getAttribute("location") || "Default Location";
+    const title = this.getAttribute("title");
+    const location = this.getAttribute("location");
+    const id = this.getAttribute("id");
+
     this.innerHTML = `
     <div class="playground-item">
-      <h3>${title}</h3>
-      <span>${location}</span>
+      <a href="/details/${id}">
+        <h3>${title}</h3>
+        <p>${location}</p>
+      </a>
     </div>
   `;
   }

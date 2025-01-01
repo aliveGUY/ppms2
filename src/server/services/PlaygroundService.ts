@@ -20,6 +20,6 @@ export class PlaygroundService {
   async getAllPlaygrounds(): Promise<string> {
     const playgrounds = await this.playgroundRepository.find();
     const result = playgrounds.map(item => generateTag('playground-list-item', item))
-    return result.join()
+    return result.join('\n')
   }
 }

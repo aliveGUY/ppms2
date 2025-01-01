@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 
 @Controller()
 export class HTMLController {
@@ -9,9 +9,12 @@ export class HTMLController {
     return { title: 'Home Page' };
   }
 
-  @Get('/details')
+  @Get('/details/:id')
   @Render('pages/details')
-  getAboutPage() {
-    return { title: 'Details Page' };
+  getAboutPage(@Param('id') id: string) {
+    return {
+      title: 'Details Page',
+      id: id
+    };
   }
 }
