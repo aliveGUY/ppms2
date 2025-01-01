@@ -1,1 +1,14 @@
-<h1>Home</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../templates/commonMeta') %>
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('../templates/header') %>
+    <h1>Home</h1>
+    <div hx-get="/api/playground" hx-trigger="load"></div>
+
+    <%- include('../templates/footer') %>
+  </body>
+</html>

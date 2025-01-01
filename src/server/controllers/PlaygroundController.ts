@@ -1,18 +1,19 @@
-import { Request, Response, Router } from "express";
-import { getCustomRepository } from "typeorm";
-import { PlaygroundRepository } from "../repositories/PlaygroundRepository";
+import { Controller, Post, Body, Get } from '@nestjs/common';
+import { PlaygroundService } from '../services/PlaygroundService';
+import { Playground } from '../entities/Playground';
 
-async function createplayground(req: Request, res: Response): Promise<any> {
-  const { title, location } = req.body;
+@Controller('api/playground')
+export class PlaygroundController {
+  constructor(private readonly playgroundService: PlaygroundService) { }
 
-  const playgroundRepository = getCustomRepository(PlaygroundRepository);
-  const playground = await playgroundRepository.createPlayground(title, location);
+  @Post()
+  async create(@Body() body: { title: string; location: string }): Promise<Playground> {
+    const { title, location } = body;
+    return this.playgroundService.createPlayground(title, location);
+  }
 
-  return res.json(playground);
+  @Get()
+  async getAllPlaygrounds(): Promise<string> {
+    return await this.playgroundService.getAllPlaygrounds()
+  }
 }
-
-const router = Router();
-
-router.post("/api/playground", createplayground);
-
-export default router;

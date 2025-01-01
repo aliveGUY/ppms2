@@ -20,8 +20,4 @@ export class Booking {
 
   @Column("text")
   description: string;
-
-  @ManyToOne(() => Playground, (playground) => playground.bookings)
-  @JoinColumn({ name: "uniqueid" })
-  playground: Playground;
 }

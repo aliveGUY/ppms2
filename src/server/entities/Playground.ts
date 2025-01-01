@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-} from "typeorm";
-import { Booking } from "./Booking";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Playground {
@@ -16,7 +10,4 @@ export class Playground {
 
   @Column()
   location: string;
-
-  @OneToMany(() => Booking, (booking) => booking.playground)
-  bookings: Booking[];
 }

@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { Playground } from "../entities/Playground";
 
-interface IPlaygroundRepository {
+export interface IPlaygroundRepository {
   createPlayground(title: string, location: string): Promise<Playground>
 }
 

@@ -1,31 +1,21 @@
-import express from "express";
-import path from "path";
-import expressLayouts from "express-ejs-layouts";
-import { AppDataSource } from './data-source'
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './data-source';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import * as path from 'path';
 
-import htmlRouter from './controllers/html'
-import playgroundController from './controllers/PlaygroundController'
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+  // Ensure that static files are being served from the "static" directory
+  app.useStaticAssets(path.join(__dirname, '..', 'static'), {
+    prefix: '/static', // All static assets will be prefixed with "/static"
+  });
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("Database initialized");
-  })
-  .catch((err) => console.error("Database initialization error:", err));
+  app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
+  app.setViewEngine('ejs');
 
+  await app.listen(3000);
+  console.log('Server is running on http://localhost:3000');
+}
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
-
-app.use(expressLayouts);
-
-app.use(express.static(path.join(__dirname, "../views")));
-
-app.use(playgroundController);
-app.use(htmlRouter);
-
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+bootstrap();
